@@ -1,0 +1,11 @@
+FROM mongo-express:0.49.0
+
+LABEL maintainer="chenwenlong <chenwenlong@epweike.com>"
+
+# repositorie mirror、timezone
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/' /etc/apk/repositories ; \
+    apk add --no-cache --virtual .timezone-deps tzdata; \
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime ; \
+    echo 'Asia/Shanghai' > /etc/timezone; \
+    rm -rf /var/cache/apk/* /tmp/* /var/tmp/* /var/lib/apt/lists/*
+
