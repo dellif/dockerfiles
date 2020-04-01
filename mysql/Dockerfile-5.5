@@ -1,0 +1,17 @@
+FROM mysql:5.5
+
+LABEL maintainer="donglifan <donggefor2018@163.com>"
+
+#####################################
+# Set Timezone
+#####################################
+
+ARG TZ=UTC
+ENV TZ ${TZ}
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && chown -R mysql:root /var/lib/mysql/
+
+COPY my5.5.cnf /etc/mysql/conf.d/my.cnf
+
+EXPOSE 3306
+
+CMD ["mysqld"]
