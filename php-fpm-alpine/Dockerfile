@@ -80,6 +80,10 @@ RUN { \
 		echo 'opcache.enable_cli=1'; \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
+# Iconv fix: https://github.com/docker-library/php/issues/240#issuecomment-305038173
+RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ gnu-libiconv
+ENV LD_PRELOAD=/usr/lib/preloadable_libiconv.so
+
 COPY php7.2.ini /usr/local/etc/php/php.ini
 
 #RUN apk --no-cache add shadow; \
