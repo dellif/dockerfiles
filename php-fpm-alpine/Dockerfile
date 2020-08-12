@@ -29,7 +29,7 @@ RUN set -ex ; \
 		libpng-dev; \
 	docker-php-ext-configure gd --with-png-dir=/usr/include --with-jpeg-dir=/usr/include --with-freetype-dir=/usr/include/freetype2; \
 	docker-php-ext-configure intl; \
-	docker-php-ext-install gd mysqli opcache pdo_mysql zip intl exif pcntl bcmath sockets; \
+	docker-php-ext-install gd mysqli opcache pdo_mysql zip intl exif pcntl bcmath sockets soap; \
 	pecl install redis-4.2.0; \
 	pecl install memcached-3.1.3; \
 	pecl install imagick-3.4.3; \
@@ -58,7 +58,7 @@ RUN set -ex ; \
         make install \
     ); \
     rm -r pecl-search_engine-solr; \
-	docker-php-ext-enable redis memcached imagick swoole solr mongodb;\
+	docker-php-ext-enable redis memcached imagick swoole solr mongodb soap;\
 	runDeps="$( \
 		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
 			| tr ',' '\n' \
@@ -79,6 +79,10 @@ RUN { \
 		echo 'opcache.fast_shutdown=1'; \
 		echo 'opcache.enable_cli=1'; \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
+
+# Iconv fix: https://github.com/docker-library/php/issues/240#issuecomment-305038173
+RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ gnu-libiconv
+ENV LD_PRELOAD=/usr/lib/preloadable_libiconv.so
 
 COPY php7.2.ini /usr/local/etc/php/php.ini
 
