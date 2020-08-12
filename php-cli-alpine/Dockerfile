@@ -9,7 +9,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/' /etc/apk/repositories
     echo 'Asia/Shanghai' > /etc/timezone; \
     rm -rf /var/cache/apk/* /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
-ARG SWOOLE_VERSION=4.4.15
+ARG SWOOLE_VERSION=4.5.2
 
 RUN set -ex ; \
 	apk add --no-cache --virtual .build-deps \
