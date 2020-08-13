@@ -2,7 +2,7 @@ FROM php:7.2-cli-alpine3.11
 
 LABEL maintainer="donglifan <donggefor2018@163.com>"
 
-ARG PHPCS_VERSION=3.3.2
+ARG PHPCS_VERSION=3.5.6
 
 # repositorie mirror、timezone
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/' /etc/apk/repositories ; \
