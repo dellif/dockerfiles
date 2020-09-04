@@ -10,6 +10,9 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/' /etc/apk/repositories
     rm -rf /var/cache/apk/* /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
 ARG SWOOLE_VERSION=4.5.2
+ARG UNAME=dongge
+ARG UID=1000
+ARG GID=1000
 
 RUN set -ex ; \
 	apk add --no-cache --virtual .build-deps \
@@ -93,5 +96,9 @@ COPY php7.2.ini /usr/local/etc/php/php.ini
 
 #RUN apk --no-cache add shadow; \
 #    usermod -u 1000 www-data
+
+# run as host user dongge
+RUN adduser -D -u ${UID} ${UNAME}
+USER ${UNAME}
 
 WORKDIR /var/www
