@@ -89,6 +89,8 @@ RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/co
 ENV LD_PRELOAD=/usr/lib/preloadable_libiconv.so
 
 COPY php7.2.ini /usr/local/etc/php/php.ini
+COPY phpcs.phar /usr/local/bin/phpcs
+COPY phpcbf.phar /usr/local/bin/phpcbf
 
 # bash
 #RUN apk add --no-cache \
@@ -96,6 +98,10 @@ COPY php7.2.ini /usr/local/etc/php/php.ini
 
 #RUN apk --no-cache add shadow; \
 #    usermod -u 1000 www-data
+
+RUN chmod +x /usr/local/bin/phpcs \
+    && chmod +x /usr/local/bin/phpcbf \
+    && rm -rf /var/cache/apk/* /var/tmp/* /tmp/*
 
 # run as host user dongge
 RUN adduser -D -u ${UID} ${UNAME}
