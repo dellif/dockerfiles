@@ -1,4 +1,4 @@
-FROM php:7.2-cli-alpine3.11
+FROM php:7.2-cli-alpine3.12
 
 LABEL maintainer="donglifan<donggefor2018@163.com>"
 
@@ -29,7 +29,7 @@ RUN set -ex ; \
 		libpng-dev; \
 	docker-php-ext-configure gd --with-png-dir=/usr/include --with-jpeg-dir=/usr/include --with-freetype-dir=/usr/include/freetype2; \
 	docker-php-ext-configure intl; \
-	docker-php-ext-install gd mysqli opcache pdo_mysql zip intl exif pcntl bcmath; \
+	docker-php-ext-install gd mysqli opcache pdo_mysql zip intl exif pcntl bcmath soap; \
 	pecl install redis-4.2.0; \
 	pecl install memcached-3.1.3; \
 	pecl install imagick-3.4.3; \

@@ -1,4 +1,4 @@
-FROM mongo:4.0.17-xenial
+FROM mongo:4.0.20-xenial
 
 LABEL maintainer="donglifan <donggefor2018@163.com>"
 

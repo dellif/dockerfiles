@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-alpine
+FROM php:7.2-fpm-alpine3.12
 
 LABEL maintainer="donglifan<donggefor2018@163.com>"
 

@@ -1,4 +1,4 @@
-FROM donglf681/php:7.2-cli-alpine3.11
+FROM donglf681/php:7.2-cli-alpine3.12
 
 LABEL maintainer="donglifan <dongggefor2018@163.com>"
 

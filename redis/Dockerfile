@@ -1,4 +1,4 @@
-FROM redis:5.0.8-alpine3.11
+FROM redis:5.0.9-alpine3.12
 
 LABEL maintainer="donglifan <donggefor2018@163.com>"
 
