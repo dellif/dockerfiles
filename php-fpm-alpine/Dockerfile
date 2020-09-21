@@ -38,6 +38,7 @@ RUN set -ex ; \
 	pecl install imagick-3.4.3; \
 	pecl install mongodb-1.5.3; \
 	pecl install amqp-1.9.4; \
+  pecl install xlswriter; \
 	# swoole
     curl -SL "https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz" -o swoole.tar.gz; \
     mkdir -p swoole; \
@@ -61,7 +62,7 @@ RUN set -ex ; \
         make install \
     ); \
     rm -r pecl-search_engine-solr; \
-	docker-php-ext-enable redis memcached imagick swoole solr mongodb soap;\
+	docker-php-ext-enable redis memcached imagick swoole solr mongodb soap xlswriter;\
 	runDeps="$( \
 		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
 			| tr ',' '\n' \
