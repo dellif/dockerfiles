@@ -1,4 +1,4 @@
-FROM donglf681/php:7.2-cli-alpine3.12
+FROM donglf681/php:7.2-cli-alpine3.12-v3
 
 LABEL maintainer="donglifan <dongggefor2018@163.com>"
 
@@ -13,6 +13,7 @@ ENV COMPOSER_REPO_PACKAGIST "https://mirrors.aliyun.com/composer/"
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /tmp
 ENV COMPOSER_VERSION 1.10.1
+USER root
 
 RUN set -ex ; \
 	apk add --no-cache --virtual .build-deps \

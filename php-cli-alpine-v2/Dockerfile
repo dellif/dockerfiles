@@ -29,15 +29,18 @@ RUN set -ex ; \
 	    libmcrypt-dev \
 	    libmemcached-dev \
 		libjpeg-turbo-dev \
-		libpng-dev; \
+		libpng-dev \
+        rabbitmq-c \
+        rabbitmq-c-dev; \
 	docker-php-ext-configure gd --with-png-dir=/usr/include --with-jpeg-dir=/usr/include --with-freetype-dir=/usr/include/freetype2; \
 	docker-php-ext-configure intl; \
-	docker-php-ext-install gd mysqli opcache pdo_mysql zip intl exif pcntl bcmath soap; \
+	docker-php-ext-install gd mysqli opcache pdo_mysql zip intl exif pcntl bcmath soap sockets; \
 	pecl install redis-4.2.0; \
 	pecl install memcached-3.1.3; \
 	pecl install imagick-3.4.3; \
 	pecl install mongodb-1.5.3; \
 	pecl install mcrypt-1.0.1; \
+    pecl install amqp-1.10.2; \
 	# swoole
     curl -SL "https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz" -o swoole.tar.gz; \
     mkdir -p swoole; \
@@ -62,7 +65,7 @@ RUN set -ex ; \
         make install \
     ); \
     rm -r pecl-search_engine-solr; \
-	docker-php-ext-enable redis memcached imagick swoole solr mongodb mcrypt;\
+	docker-php-ext-enable redis memcached imagick swoole solr mongodb mcrypt amqp;\
 	runDeps="$( \
 		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
 			| tr ',' '\n' \
