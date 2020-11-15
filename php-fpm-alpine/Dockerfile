@@ -69,7 +69,8 @@ RUN set -ex ; \
 			| sort -u \
 			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
 	)"; \
-	apk add --virtual .epwk-phpexts-rundeps $runDeps; \
+    # add imagemagick use
+	apk add --virtual .epwk-phpexts-rundeps $runDeps imagemagick; \
 	apk del .build-deps; \
 	rm -rf /var/cache/apk/* /tmp/* /var/tmp/* /var/lib/apt/lists/* /var/www/html
 
